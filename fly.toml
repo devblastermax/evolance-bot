@@ -1,12 +1,25 @@
-app = "evolance-ai-trading-bot"
-primary_region = "ams"
+# fly.toml app configuration file generated for evolance-ai-trading-bot on 2026-07-30T05:56:24Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'evolance-ai-trading-bot'
+primary_region = 'cdg'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
 [processes]
-  app = "node dist/index.js"
+  app = 'node dist/index.js'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
 
 [[vm]]
-  size = "shared-cpu-1x"
-  memory = "512mb"
+  size = 'shared-cpu-1x'
+  memory = '512mb'
