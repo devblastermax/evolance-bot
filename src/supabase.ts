@@ -1,4 +1,10 @@
+import WebSocket from "ws";
 import { createClient } from "@supabase/supabase-js";
+
+const nodeWebSocket = WebSocket as unknown as any;
+if (!globalThis.WebSocket) {
+  globalThis.WebSocket = nodeWebSocket as typeof globalThis.WebSocket;
+}
 
 const url = process.env.SUPABASE_URL;
 const anonKey = process.env.SUPABASE_PUBLISHABLE_KEY;
@@ -36,6 +42,9 @@ export const db = createClient(url, anonKey, {
     persistSession: true,
     autoRefreshToken: true,
     storage: new MemoryStorage(),
+  },
+  realtime: {
+    transport: nodeWebSocket,
   },
 });
 
