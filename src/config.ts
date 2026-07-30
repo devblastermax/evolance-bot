@@ -31,12 +31,7 @@ export function currentConfig(): BotConfig {
   return cached;
 }
 
-/** Realtime push so kill-switch flips land within ~1s; the loop also re-reads as fallback. */
+/** The trading loop re-reads config every cycle; no Realtime subscription is needed. */
 export function watchConfig(onChange: (cfg: BotConfig) => void) {
-  db.channel("bot-config-watch")
-    .on("postgres_changes", { event: "*", schema: "public", table: "bot_config" }, (payload) => {
-      cached = payload.new as BotConfig;
-      onChange(cached);
-    })
-    .subscribe();
+  void onChange;
 }
