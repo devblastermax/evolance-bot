@@ -1,0 +1,14 @@
+app = "evolance-bot"
+primary_region = "ams"
+
+[build]
+  builder = "heroku/buildpacks:20"
+
+[processes]
+  app = "node dist/index.js"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
+
+# No public HTTP service - this is a background worker.
