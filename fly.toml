@@ -1,8 +1,8 @@
-app = "evolance-bot"
+app = "evolance-ai-trading-bot"
 primary_region = "ams"
 
 [build]
-  builder = "dockerfile = "Dockerfile", commit."
+  dockerfile = "Dockerfile"
 
 [processes]
   app = "node dist/index.js"
@@ -10,5 +10,3 @@ primary_region = "ams"
 [[vm]]
   size = "shared-cpu-1x"
   memory = "512mb"
-
-# No public HTTP service - this is a background worker.
